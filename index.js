@@ -13,14 +13,10 @@ class Timer {
     this.interval = setInterval(this.tick, 1000);
   };
   tick = () => {
-    // what do we want to do every second
-    // show the time in the dom
-    // decrment the anount of time so that the pause can be called at the correct time
-    // likes time remaining = time remaining - 1 , but where is time remaining stored?
-    // since this app us using user interactions makes more sense to grab out of the DOM  (normaly option 1 would be more desirable and more widely used.)
-    
-
-    console.log("tick");
+    // get the text input and convert to a number
+    const timeRemaining = parseFloat(this.durationInput.value);
+    // update the value and put it back into the div
+    this.durationInput.value = timeRemaining - 1;
   };
   pause = () => {
     clearInterval(this.interval);
