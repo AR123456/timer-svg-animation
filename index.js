@@ -5,6 +5,8 @@ class Timer {
     this.pauseButton = pauseButton;
     if (callbacks) {
       this.onStart = callbacks.onStart;
+      this.onTick = callbacks.onTick;
+      this.onComplete = callbacks.onComplete;
     }
     // watching for the click events
     this.pauseButton.addEventListener("click", this.pause);
@@ -21,8 +23,14 @@ class Timer {
   tick = () => {
     if (this.timeRemaining <= 0) {
       this.pause();
+      if (this.onComplete) {
+        this.onComplete();
+      }
     } else {
       this.timeRemaining = this.timeRemaining - 1;
+      if (this.onTick) {
+        this.onTick();
+      }
     }
   };
   get timeRemaining() {
@@ -44,12 +52,14 @@ const timer = new Timer(durationInput, startButton, pauseButton, {
   // 3 optional callbacks
   onStart() {
     //do something with the boarder animation
-    console.log("timer strted ");
+    console.log("timer started ");
   },
   onTick() {
     //do something with the boarder animation
+    console.log("tick");
   },
   onComplete() {
     //so something with the border animation
+    console.log("timer is completed");
   }
 });
