@@ -13,7 +13,11 @@ class Timer {
     this.interval = setInterval(this.tick, 1000);
   };
   tick = () => {
+   if (this.timeRemaining <=0) {
+     this.pause();
+   }else{
     this.timeRemaining = this.timeRemaining - 1;
+   }
   };
   get timeRemaining() {
     return parseFloat(this.durationInput.value);
